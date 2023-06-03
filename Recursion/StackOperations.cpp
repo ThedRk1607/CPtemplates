@@ -69,3 +69,24 @@ void delM(stack<int>&S,int i=0){
 
 
 }
+
+//reverse stack using recursion;
+void insert(stack<int>&st,int x){
+	if(st.size()==0){
+		st.push(x);
+		return;
+	}
+	int last=st.top();
+	st.pop();
+	insert(st,x);
+	st.push(last);
+
+}
+
+void rev(stack<int>&S,int i=0){
+	if(S.size()==0)return;
+	int l=S.top();
+	S.pop();
+	rev(S);
+	insert(S,l);
+}
