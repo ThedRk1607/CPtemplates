@@ -1,4 +1,4 @@
-
+//sorting a array using recursion;
 void Insert(vi &v,int last){
 	if(v.size()==0 or v.back()<=last){
 		v.pb(last);
@@ -20,7 +20,7 @@ void Sort(vi &v){
 	Sort(v);
 	Insert(v,last);
 }
-
+//sorting a stack using recursion;
 void Insert(stack<int> &v,int last){
 	if(v.size()==0 or v.top()<=last){
 		v.push(last);
@@ -34,7 +34,7 @@ void Insert(stack<int> &v,int last){
 	
 	
 }
-//sorting a stack using recursion;
+
 void Sort(stack<int> &v){
 	if(v.size()==1)return ;
 
@@ -52,4 +52,20 @@ void display(stack<int>&s){
 	s.pop();
 	display(s);
 	cout<<x<<" ";
+}
+
+//del middle element of stack
+void delM(stack<int>&S,int i=0){
+   if(i==5)return ;
+
+   int last=S.top();
+   S.pop();
+   delM(S,i+1);
+   if(i==5/2)return;
+   else S.push(last);
+
+   return;
+
+
+
 }
