@@ -1,6 +1,6 @@
 //something Range DP
 int n;
-ll dp[2005][2005];
+ll dp[2005][2005]; //dp[i][j] is min discrepancy from rang i to j;
     
 void solve(){
  cin>>n;
