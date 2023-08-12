@@ -40,12 +40,16 @@ ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
     }
 
 //usint two pointer;
-ListNode * getIntersectionNode(ListNode * headA, ListNode * headB) {
-  ListNode * pA = headA;
-  ListNode * pB = headB;
-  while (pA != pB) {
-    pA = pA == nullptr ? headB : pA -&gt; next;
-    pB = pB == nullptr ? headA : pB -&gt; next;
-  }
-  return pA;
+node* intersectionPresent(node* head1,node* head2) {
+    while(head2 != NULL) {
+        node* temp = head1;
+        while(temp != NULL) {
+            //if both nodes are same
+            if(temp == head2) return head2;
+            temp = temp->next;
+        }
+        head2 = head2->next;
+    }
+    //intersection is not present between the lists return null
+    return NULL;
 }
