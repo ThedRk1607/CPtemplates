@@ -1,6 +1,6 @@
 const int N=1000;
 vector<bool> is_prime(N, true);
-vector<int>lp(N),hp(N);
+vector<int>lp(N),hp(N);//leastPrimefctor,highestPrimeFactor;
 
 void sieve(){
 is_prime[0] = is_prime[1] = false;
