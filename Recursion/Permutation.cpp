@@ -18,3 +18,19 @@ void search(){
 		perm.pop_back();
 	}
 }
+
+
+//
+count permutations;
+int rec(string a,string b){
+	
+	if(b.size()==0){
+		return 1;
+	}
+
+	 int cnt=0;
+	for(int i=0;i<=a.size();i++){
+		cnt+=rec(a.substr(0,i)+b[0]+a.substr(i),b.substr(1));
+	}
+	return cnt;
+}
