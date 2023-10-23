@@ -33,6 +33,18 @@ template <typename A, typename B> A amin (A &a, B b){ if (b < a) a = b ; return 
 int n;
 int queen[20]; //queen[i] where is q at row i;
 char grid[8][8];
+bool vis[8][8];
+
+void disp(){
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			if(vis[i][j])cout<<"Q ";
+			else cout<<"X ";
+		}
+		cout<<nl;
+	}
+	cout<<nl;
+}
 
 bool check(int row,int col){
 	for(int i=0;i<row;i++){
@@ -45,7 +57,10 @@ bool check(int row,int col){
 }
 
 int rec(int level){
-	if(level==n)return 1;
+	if(level==n){
+		disp();
+		return 1;
+	}
 
 	//choice or transition
 	int ans=0;
@@ -54,10 +69,12 @@ int rec(int level){
 			if(grid[level][col]=='*')continue;
 			//place the queen 
 			queen[level]=col;
+			vis[level][col]=1;
 			//explore the options;
 			ans+=rec(level+1);
 			//backtrack if not work
 			//queen[level]=-1;
+			//vis[level][col]=0;
 		}
 	}
 	return ans;
