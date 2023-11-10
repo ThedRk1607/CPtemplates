@@ -53,3 +53,42 @@ int get_hash(int x,int y){
 	res=mul(res,(x==0)?1:inv[x-1]);
 	return res;
 }
+
+
+///Template other
+//Q finding Period of cses;
+const int mod=1e9+7;
+struct Hash
+{
+	int n;
+	vector<ULL> XP,H;
+	void init(const string& s, ULL x)
+	{
+		n=s.size(),XP.resize(n+1),H.resize(n+1);
+		XP[0]=1;
+		for(int i=1;i<=n;i++) XP[i]=XP[i-1]*x;
+		H[n]=0;
+		for(int i=n-1;i>=0;i--) H[i]=(s[i]+x*H[i+1]);
+	}
+	ULL c_hash(int l,int r) const { return (H[l]-H[r]*XP[r-l]); }
+};
+int main()
+{
+	ios::sync_with_stdio(false),cin.tie(0);
+	string s;
+	Hash H;
+	cin>>s,H.init(s,123);
+	int len=s.size();
+	for(int i=1;i<=len;i++)
+	{
+		int c=len/i,l=len%i;
+		if(l!=0 && H.c_hash(0,l)!=H.c_hash(c*i,len))
+			continue;
+		if(c!=1 && H.c_hash(0,i*(c-1))!=H.c_hash(i,i*c))
+			continue;
+		cout<<i<<" ";
+	}
+	return 0;
+}
+
+
