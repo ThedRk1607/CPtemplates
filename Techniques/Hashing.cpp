@@ -91,4 +91,31 @@ int main()
 	return 0;
 }
 
+//new template
+using LL=unsigned long long;
+
+const long long mod=422305885116175013;
+
+
+
+struct Hash
+{
+	int n;
+	vector<LL> XP,H;
+	void init(const string& s, int x)
+	{
+		n=s.size(),XP.resize(n+1),H.resize(n+1);
+		XP[0]=1;
+		for(int i=1;i<=n;i++) XP[i]=XP[i-1]*x%mod;
+		 H[0]=0;
+		for(int i=1;i<=n;i++){H[i]=(H[i-1]*x+s[i-1])%mod;}
+
+	}
+	LL c_hash(int l,int r) const { 
+		LL h=H[r+1]-(XP[r-l+1]*H[l]%mod)%mod;
+		return h<0 ? h+mod : h;
+
+	 }
+};
+
 
