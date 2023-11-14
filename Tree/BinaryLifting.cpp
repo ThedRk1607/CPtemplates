@@ -6,7 +6,18 @@ vi tin,tout;
 
 struct BinaryLift{
 
-
+// void dfs(int a,int pa){
+// 	for(int b:adj[a]){
+// 		if(b!=pa){
+// 			depth[b]=depth[a]+1;
+// 		up[b][0]=a; //a is parent of b;
+// 		for(int j=1;j<=21;j++){
+// 			up[b][j]=up[up[b][j-1]][j-1];
+// 		}
+// 		dfs(b,a);
+// 		}
+// 	}
+// }
 void dfs(int v, int p=-1)
 {
     tin[v] = ++timer;
