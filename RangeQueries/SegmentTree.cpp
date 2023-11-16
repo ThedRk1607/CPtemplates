@@ -86,3 +86,16 @@ struct Update1 {
 		a.val = val; // may change
 	}
 };
+//how to use it
+void solve(){
+	int n,q;cin>>n>>q;
+	vl a(n);FORR(x,a)cin>>x;
+	SegTree<Node1,Update1>Segtree(n,a);
+	Segtree.build(0,n-1,1);
+	while(q--){
+		
+
+	}
+	
+}
+
