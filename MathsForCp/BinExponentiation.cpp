@@ -30,5 +30,21 @@ int inv(int i) {
 inv[1] = 1;
 for(int i = 2; i < m; ++i)
     inv[i] = m - (long long)(m/i) * inv[m%i] % m;
+//
+inline ll gcd(ll a,ll b){
+	if(a and b)while((a%=b) and (b%=a));
+	return a^b;
+}
+inline ll exp(ll b, ll p, ll m) {
+	ll r=1;
+	while(p) {
+		if(p&1)
+			r=(__int128)r*b%m;
+		b=(__int128)b*b%m;
+		p/=2;
+	}
+	return r;
+}
+
     
     
