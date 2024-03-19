@@ -46,5 +46,32 @@ inline ll exp(ll b, ll p, ll m) {
 	return r;
 }
 
-    
+inline void add(int &a, int b) {
+  a += b;
+  if (a >= m) a -= m;
+}
+
+inline void sub(int &a, int b) {
+  a -= b;
+  if (a < 0) a += m;
+}
+
+inline int mul(int a, int b) {
+  return (int) ((long long) a * b % m);
+}
+
+inline int inv(int a) {
+  a %= m;
+  if (a < 0) a += m;
+  int b = m, u = 0, v = 1;
+  while (a) {
+    int t = b / a;
+    b -= t * a; swap(a, b);
+    u -= t * v; swap(u, v);
+  }
+  assert(b == 1);
+  if (u < 0) u += m;
+  return u;
+}
+
     
