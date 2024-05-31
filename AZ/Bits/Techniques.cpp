@@ -57,4 +57,11 @@ void solve(){
 
 }
 	
-	
+//bitwise OR IN range L to R
+int ANS=0;
+	 rep(k,0, 40) {
+    ll a = L >> k;
+    ll b = R >> k;
+    if (a & 1) ANS |= 1LL << k;
+    if (a < b) ANS |= 1LL << k;
+  }
