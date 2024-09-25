@@ -11,7 +11,26 @@ void solve(){
         kmp[i]=j;
     }
 
-	// if (kmp[n]==0) {
+//o base indexing
+ string s;
+    cin >> s;
+    int n = s.length();
+    vector<int> kmp(n + 1, 0);
+    
+    // Build the KMP array (prefix function)
+    int j = 0;
+    for (int i = 1; i < n; i++) {
+        while (j > 0 && s[i] != s[j]) {
+            j = kmp[j - 1];
+        }
+        if (s[i] == s[j]) {
+            j++;
+        }
+        kmp[i] = j;
+    }
+
+	
+// if (kmp[n]==0) {
  //        cout<<-1<<endl;
  //        return;
  //    }
