@@ -24,3 +24,63 @@ void dfs(int node){
 		// lose[node]  = lose[node]|(1 - lose[trie[node][i]]);
 	}
 }
+
+
+
+//prefix tree based trie
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+// Define the maximum number of possible characters (lowercase English letters)
+const int ALPHABET_SIZE = 26;
+
+// Trie Node Structure
+struct TrieNode {
+    TrieNode* children[ALPHABET_SIZE];
+    int count; // Count of strings passing through this node
+
+    TrieNode() : count(0) {
+        for (int i = 0; i < ALPHABET_SIZE; ++i) {
+            children[i] = nullptr;
+        }
+    }
+};
+
+// Trie Class
+class Trie {
+private:
+    TrieNode* root;
+    
+    // Insert a string into the trie
+    void insert(const string& s) {
+        TrieNode* node = root;
+        for (char c : s) {
+            int idx = c - 'a';
+            if (!node->children[idx]) {
+                node->children[idx] = new TrieNode();
+            }
+            node = node->children[idx];
+            node->count++; // Increment the count of strings passing through this node
+        }
+    }
+
+    // Find LCP for a given string with the rest of the strings in the Trie
+    int findLCP(const string& s) {
+        TrieNode* node = root;
+        int lcp = 0;
+        for (char c : s) {
+            int idx = c - 'a';
+            if (!node->children[idx] || node->children[idx]->count == 1) {
+                break;
+            }
+            node = node->children[idx];
+            lcp++;
+        }
+        return lcp;
+    }
+};
+
