@@ -3,7 +3,7 @@ void solve(){
   vi p,perm;
   if(n>12){
   	for(int i=1;i<=n;i++){
-  		if(i>=n-11)p.pb(i);
+  		if(i>=n-12)p.pb(i);
   		else perm.pb(i);
   	}
   }else {
