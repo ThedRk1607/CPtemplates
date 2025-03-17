@@ -68,6 +68,24 @@ private:
         }
     }
 
+void remove(const string& s,Trie*root,int k) {
+        Trie* node = root;int len=0;
+        for (char c : s) {len++;
+            int idx = c - 'a';
+            if (!node->child[idx]) {
+                node->child[idx] = new Trie();
+            }
+            node = node->child[idx];
+            node->count--; // Increment the count of strings passing through this node
+            if(node->count==k-1){
+                mp[len]--;
+                if(mp[len]==0)st.erase(len);
+            }
+        }
+    }
+
+
+
     // Find LCP for a given string with the rest of the strings in the Trie
     int findLCP(const string& s) {
         TrieNode* node = root;
