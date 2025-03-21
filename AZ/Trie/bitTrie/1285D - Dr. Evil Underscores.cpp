@@ -25,3 +25,49 @@ int main(){
     for(auto &i : a) cin >> i;
     cout << solve(a, 30) << endl;
 }
+//trie solution use dnc remember when use some x factor;
+
+struct trie{
+	trie*child[2];int cnt;bool stop=false;
+	trie(){
+		rep(i,0,2)child[i]=NULL;cnt=0;
+	}
+};
+ 
+void insert(int n,trie*root){
+	trie*node=root;
+  for(int b=30;b>=0;b--){
+  	int x=(n>>b&1);
+  	if(node->child[x]==NULL){
+  		node->child[x]=new trie();
+  	}
+  	node=node->child[x];
+  	node->cnt++;
+  }
+	node->stop=true;
+}
+ 
+int q(trie*root,int x){
+		if(x == -1 or root == nullptr)return 0;
+ 
+	int L = q(root->child[0], x-1);
+	int R = q(root->child[1], x-1);
+	bool hasleft = root->child[0] != nullptr;
+	bool hasright = root->child[1] != nullptr;
+	return (hasleft and hasright ? (1LL << x) + min(L, R) : L + R);
+ 
+	
+}
+ 
+ 
+ 
+ 
+void solve(){
+	int n;cin>>n;
+	trie*T=new trie();
+	rep(i,0,n){int x;cin>>x;insert(x,T);}
+	cout<<q(T,30);
+ 
+ 
+	
+}
