@@ -27,6 +27,19 @@ void dfs(int node,int p=-1){
  	}
  }
 
+
+//in one dfs
+// void dfs(int u,int p){
+// 	mx[u]=-inf;sum[u]=a[u];
+// 	for(int v:g[u]){
+// 		if(v==p)continue;
+// 		dfs(v,u);
+// 		sum[u]+=sum[v];
+// 		ans=max(ans,mx[u]+mx[v]);
+// 		mx[u]=max(mx[u],mx[v]);
+// 	}
+// 	mx[u]=max(mx[u],sum[u]);
+// }
 void solve(){		
  	cin>>n;
  	rep(i,0,n)g[i].clear();
