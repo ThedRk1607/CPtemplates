@@ -9,3 +9,15 @@ int f(int m,int n){
 	return ans;
 }
  
+int f(int n) {
+    int p = 1;
+    while (p <= n) p <<= 1;  // find next power of 2
+    return p - 1;
+}
+
+int f2(int L, int R) {
+    int d = L ^ R;
+    if (d == 0) return L; // all numbers same
+    int msb = 32 - __builtin_clz(d); // position of highest differing bit
+    return R | ((1 << msb) - 1);
+}
