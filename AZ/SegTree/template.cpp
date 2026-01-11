@@ -114,40 +114,51 @@ node query(int index,int l,int r,int lq,int rq){
 }
 
 
-void solve(){
-	cin>>n>>q;
-	rep(i,0,n)cin>>arr[i];
-	build(1,0,n-1);
-	
-	while(q--){
-		int pos,value;cin>>pos>>value;
-		 update(1,0,n-1,pos-1,value);
-		node ans=query(1,0,n-1,0,n-1);
-		cout<<ans.msum<<nl;
-	}
-}
-
-int32_t main()
+ //newtemplate
+int n, q;
+struct node
 {
- 	#ifndef ONLINE_JUDGE
-freopen("input.txt", "r", stdin);
-freopen("output.txt", "w", stdout);
-#endif
-
-
-   
-   ios_base::sync_with_stdio(0); 
-    cin.tie(0); cout.tie(0);
-
-
- 
-   
-   int T=1;//cin >> T;
-   while(T--)solve();
-  
-
-
-    return 0;
-    
+    int mxu, mnu, mxv, mnv;
+    node () : mxu(-inf), mnu(inf), mxv(-inf), mnv(inf) {}
+    node (int u, int v)
+    {
+        mxu = u, mnu = u;
+        mxv = v, mnv = v;
     }
-
+};
+node merge (const node &a, const node &b)
+{
+    node ans;
+    ans.mxu = max (a.mxu, b.mxu);
+    ans.mnu = min (a.mnu, b.mnu);
+    ans.mxv = max (a.mxv, b.mxv);
+    ans.mnv = min (a.mnv, b.mnv);
+    return ans;
+}
+struct SegmentTree
+{
+    node tr[N << 2];
+    void modify (int u, int l, int r, int x, int U, int V)
+    {
+        if (l == r)
+        {
+            tr[u] = node (U, V);
+            return ;
+        }
+        int mid = (l + r) >> 1;
+        if (x <= mid)
+            modify (lc, l, mid, x, U, V);
+        else
+            modify (rc, mid + 1, r, x, U, V);
+        tr[u] = merge (tr[lc], tr[rc]);
+    }
+    node query (int u, int l, int r, int x, int y)
+    {
+        if (x > y || x > r || y < l)
+            return node ();
+        if (x <= l && y >= r)
+            return tr[u];
+        int mid = (l + r) >> 1;
+        return merge (query (lc, l, mid, x, y), query (rc, mid + 1, r, x, y));
+    }
+} seg;
